@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MemoryGame</string>
+    <string name="background_start">Start screen background</string>
+    <string name="title_start_screen">Memory Game of MTG Arena</string>
 </resources>
