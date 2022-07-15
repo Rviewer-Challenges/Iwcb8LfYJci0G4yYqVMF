@@ -45,7 +45,9 @@ fun StartScreen(navController: NavController? = null) {
             modifier = Modifier.height(100.dp),
             color = Primary
         )
-        ButtonStart { navController?.navigate(Screen.Game.route) }
+        ButtonStart { navController?.navigate(Screen.Game.passDifficult(
+            difficult.value
+        )) }
     }
 }
 
