@@ -1,4 +1,4 @@
-package com.mrkevin574.memorygame
+package com.mrkevin574.memorygame.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
