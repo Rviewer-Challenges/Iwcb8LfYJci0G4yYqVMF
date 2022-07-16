@@ -9,18 +9,24 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mrkevin574.memorygame.R
 import com.mrkevin574.memorygame.domain.model.Card
+import com.mrkevin574.memorygame.ui.theme.Accent
 import com.mrkevin574.memorygame.ui.theme.Primary
+import com.mrkevin574.memorygame.ui.theme.cinzelFontFamily
 import com.mrkevin574.memorygame.util.Difficult
 
 @Composable
@@ -29,7 +35,7 @@ fun GameScreen(
     difficult: Difficult,
     viewModel: GameViewModel = hiltViewModel()
 ) {
-    if(viewModel.gameState.value.board.isEmpty())
+    if (viewModel.gameState.value.board.isEmpty())
         viewModel.startGame(difficult)
 
     val gameSpecs = viewModel.gameState.value
@@ -52,9 +58,8 @@ fun GameScreen(
                         card = actualCard,
                         width = dimens.width,
                         height = dimens.height
-                    ){
-                        if(!actualCard.flipped)
-                            viewModel.onClickCard(actualCard)
+                    ) {
+                        viewModel.onClickCard(actualCard)
                     }
                     actualIndex++
                 }
@@ -67,27 +72,46 @@ fun GameScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Card(card: Card, width: Int, height: Int, onClick : () -> Unit) {
+fun Card(card: Card, width: Int, height: Int, onClick: () -> Unit) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = Color.Black
         ),
-        border = BorderStroke(if(card.flipped) 1.dp else 0.dp, Color.White),
-        shape = RoundedCornerShape(if(card.flipped) 5.dp else 0.dp)
+        border = BorderStroke(0.dp, Color.White)
     )
     {
-        Image(
-            painter = painterResource(
-                id = if (card.flipped) card.resId else R.drawable.back_card
-            ),
-            contentDescription = null,
-            modifier = Modifier
-                .width(width.dp)
-                .height(height.dp)
-                .padding(4.dp)
-                .clickable { onClick() },
-            contentScale = ContentScale.FillBounds
-        )
+        if (card.flipped) {
+            Image(
+                painter = painterResource(
+                    id =  card.resId
+                ),
+                contentDescription = null,
+                modifier = Modifier
+                    .width(width.dp)
+                    .height(height.dp)
+                    .padding(4.dp),
+                contentScale = ContentScale.FillBounds
+            )
+        } else {
+            Box(
+                modifier = Modifier
+                    .width(width.dp)
+                    .height(height.dp)
+                    .clickable { onClick() },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "?",
+                    fontFamily = cinzelFontFamily,
+                    textAlign = TextAlign.Center,
+                    fontSize = 50.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Accent
+                )
+            }
+
+        }
+
     }
 
 }
