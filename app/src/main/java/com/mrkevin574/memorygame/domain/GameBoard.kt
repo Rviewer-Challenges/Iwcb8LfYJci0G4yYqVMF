@@ -9,7 +9,7 @@ import kotlin.random.Random
 
 object GameBoard {
 
-    private fun getGameSpecs(difficult: Difficult): GameSpecs {
+    fun getGameSpecs(difficult: Difficult): GameSpecs {
         val dimens = getDimenByDifficult(difficult)
         val board = getRandomCardsByDifficult(dimens)
         return GameSpecs(board = board, dimenGame = dimens)
@@ -36,9 +36,9 @@ object GameBoard {
 
     private fun getDimenByDifficult(difficult: Difficult): DimenGame {
         return when (difficult) {
-            Difficult.Easy -> DimenGame(horizontal = 4, vertical = 4, width = 70, height = 160)
-            Difficult.Medium -> DimenGame(horizontal = 4, vertical = 6, width = 70, height = 160)
-            Difficult.Hard -> DimenGame(horizontal = 5, vertical = 6, width = 70, height = 160)
+            Difficult.Easy -> DimenGame(horizontal = 4, vertical = 4, width = 100, height = 200)
+            Difficult.Medium -> DimenGame(horizontal = 4, vertical = 6, width = 100, height = 135)
+            Difficult.Hard -> DimenGame(horizontal = 5, vertical = 6, width = 80, height = 135)
         }
     }
 
