@@ -17,16 +17,25 @@ object GameBoard {
 
     private fun getRandomCardsByDifficult(dimens: DimenGame): List<Card> {
         val totalSizeOfCards = (dimens.horizontal * dimens.vertical) / 2
+
         val cards = getAllCards()
+        val secondsCards = mutableListOf<Card>()
+
         val finalCardList = mutableListOf<Card>()
         val randomCards1 = mutableListOf<Card>()
         val randomCards2 = mutableListOf<Card>()
 
+
         for (i in 0 until totalSizeOfCards) {
-            randomCards1.add(cards.random(Random(System.nanoTime())))
+            val card = cards.random(Random(System.nanoTime()))
+            randomCards1.add(card)
+            secondsCards.add(card)
+            cards.remove(card)
         }
         for (i in 0 until totalSizeOfCards) {
-            randomCards2.add(cards.random(Random(System.nanoTime())))
+            val card = secondsCards.random(Random(System.nanoTime()))
+            randomCards2.add(card)
+            secondsCards.remove(card)
         }
         finalCardList.addAll(randomCards1)
         finalCardList.addAll(randomCards2)
@@ -42,8 +51,8 @@ object GameBoard {
         }
     }
 
-    private fun getAllCards(): List<Card> {
-        return listOf(
+    private fun getAllCards(): MutableList<Card> {
+        return mutableListOf(
             Card(resId = R.drawable.card_01, uniqueId = 1, flipped = false),
             Card(resId = R.drawable.card_02, uniqueId = 2, flipped = false),
             Card(resId = R.drawable.card_03, uniqueId = 3, flipped = false),
