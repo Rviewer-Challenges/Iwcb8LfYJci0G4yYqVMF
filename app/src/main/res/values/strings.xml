@@ -3,4 +3,6 @@
     <string name="background_start">Start screen background</string>
     <string name="title_start_screen">Memory Game of Dragon Ball</string>
     <string name="start">Start</string>
+    <string name="winner">Winner</string>
+    <string name="game_over">Game Over</string>
 </resources>

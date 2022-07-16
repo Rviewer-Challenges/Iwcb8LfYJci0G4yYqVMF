@@ -24,6 +24,8 @@ class GameViewModel @Inject constructor() : ViewModel(){
 
     val timeLeft = mutableStateOf("1:00")
 
+    val gameOver = mutableStateOf(false)
+
     var isTimeRunning = false
 
     private lateinit var firstPassCard : Card
@@ -37,6 +39,7 @@ class GameViewModel @Inject constructor() : ViewModel(){
 
         override fun onFinish() {
             isTimeRunning = false
+            gameOver.value = true
         }
 
     }

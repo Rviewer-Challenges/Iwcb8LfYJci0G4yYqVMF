@@ -30,6 +30,7 @@ import com.mrkevin574.memorygame.ui.theme.Accent
 import com.mrkevin574.memorygame.ui.theme.Primary
 import com.mrkevin574.memorygame.ui.theme.cinzelFontFamily
 import com.mrkevin574.memorygame.util.Difficult
+import com.mrkevin574.memorygame.util.Screen
 
 @Composable
 fun GameScreen(
@@ -48,7 +49,6 @@ fun GameScreen(
     val couplesLeft = viewModel.couplesLeft.value
     val timeLeft = viewModel.timeLeft.value
 
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -65,13 +65,18 @@ fun GameScreen(
         }
     }
 
+    GameOverDialog {
+        navController.navigate(Screen.Start.route)
+    }
+
 }
 
 @Composable
 fun ContentInfo(movements : Int, couplesLeft : Int, timeLeft : String) {
     Row(
         horizontalArrangement = Arrangement.SpaceAround,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(top = 30.dp, bottom = 30.dp)
     ) {
         TextInfo(label = "Mov", text = movements.toString())

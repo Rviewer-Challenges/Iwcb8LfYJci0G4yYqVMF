@@ -6,3 +6,5 @@ val Primary = Color(0xFF000000)
 val PrimaryLight = Color(0xCB000000)
 val Accent = Color(0xFF745915)
 
+val AlertDialogColor = Color(0xA1745915)
+
