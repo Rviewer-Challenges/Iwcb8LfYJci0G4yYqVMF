@@ -1,5 +1,6 @@
 package com.mrkevin574.memorygame.presentation.screens.gamescreen
 
+import android.view.ContentInfo
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,6 +25,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mrkevin574.memorygame.R
 import com.mrkevin574.memorygame.domain.model.Card
+import com.mrkevin574.memorygame.domain.model.DimenGame
 import com.mrkevin574.memorygame.ui.theme.Accent
 import com.mrkevin574.memorygame.ui.theme.Primary
 import com.mrkevin574.memorygame.ui.theme.cinzelFontFamily
@@ -41,12 +43,61 @@ fun GameScreen(
     val gameSpecs = viewModel.gameState.value
     val cards = gameSpecs.board
     val dimens = gameSpecs.dimenGame
+
+    val movements = viewModel.movements.value
+    val couplesLeft = viewModel.couplesLeft.value
+    val timeLeft = viewModel.timeLeft.value
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Primary)
+    )
+    {
+        ContentInfo(
+            movements = movements,
+            couplesLeft = couplesLeft,
+            timeLeft = timeLeft
+        )
+        ContentBoard(dimens = dimens, cards = cards) {
+            viewModel.onClickCard(it)
+        }
+    }
+
+}
+
+@Composable
+fun ContentInfo(movements : Int, couplesLeft : Int, timeLeft : String) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier.fillMaxWidth()
+            .padding(top = 30.dp, bottom = 30.dp)
+    ) {
+        TextInfo(label = "Mov", text = movements.toString())
+        TextInfo(text = timeLeft)
+        TextInfo(label = "Left", text = couplesLeft.toString())
+    }
+}
+
+@Composable
+fun TextInfo(label : String = "", text : String) {
+    val divider = if(label.isEmpty()) "" else ": "
+    Text(
+        text = "$label$divider$text",
+        color = Accent,
+        fontFamily = cinzelFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp
+    )
+}
+
+@Composable
+fun ContentBoard(dimens: DimenGame, cards: List<Card>, onClickCard: (Card) -> Unit) {
+
     var actualIndex = 0
 
     Row(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Primary),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -59,7 +110,7 @@ fun GameScreen(
                         width = dimens.width,
                         height = dimens.height
                     ) {
-                        viewModel.onClickCard(actualCard)
+                        onClickCard(actualCard)
                     }
                     actualIndex++
                 }
@@ -67,7 +118,6 @@ fun GameScreen(
 
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,7 +133,7 @@ fun Card(card: Card, width: Int, height: Int, onClick: () -> Unit) {
         if (card.flipped) {
             Image(
                 painter = painterResource(
-                    id =  card.resId
+                    id = card.resId
                 ),
                 contentDescription = null,
                 modifier = Modifier

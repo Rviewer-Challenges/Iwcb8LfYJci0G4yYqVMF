@@ -52,9 +52,9 @@ object GameBoard {
 
     private fun getDimenByDifficult(difficult: Difficult): DimenGame {
         return when (difficult) {
-            Difficult.Easy -> DimenGame(horizontal = 4, vertical = 4, width = 100, height = 200)
-            Difficult.Medium -> DimenGame(horizontal = 4, vertical = 6, width = 100, height = 135)
-            Difficult.Hard -> DimenGame(horizontal = 5, vertical = 6, width = 80, height = 135)
+            Difficult.Easy -> DimenGame(horizontal = 4, vertical = 4, width = 100, height = 180)
+            Difficult.Medium -> DimenGame(horizontal = 4, vertical = 6, width = 100, height = 120)
+            Difficult.Hard -> DimenGame(horizontal = 5, vertical = 6, width = 80, height = 120)
         }
     }
 

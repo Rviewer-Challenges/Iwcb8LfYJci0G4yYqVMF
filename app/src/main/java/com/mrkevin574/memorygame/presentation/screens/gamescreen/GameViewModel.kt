@@ -29,7 +29,7 @@ class GameViewModel @Inject constructor() : ViewModel(){
     private lateinit var firstPassCard : Card
     private var secondPassCard : Card? = null
 
-    val timer = object  : CountDownTimer(60000,1000){
+    private val timer = object  : CountDownTimer(60000,1000){
         override fun onTick(millisUntilFinished: Long) {
             isTimeRunning = true
             timeLeft.value = "${(millisUntilFinished / 1000 / 60).toInt()}:${(millisUntilFinished / 1000 % 60)}"
