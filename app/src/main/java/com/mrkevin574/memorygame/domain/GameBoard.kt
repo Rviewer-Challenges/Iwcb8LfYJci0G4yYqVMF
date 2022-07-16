@@ -1,6 +1,5 @@
 package com.mrkevin574.memorygame.domain
 
-import com.mrkevin574.memorygame.R
 import com.mrkevin574.memorygame.domain.model.Card
 import com.mrkevin574.memorygame.domain.model.DimenGame
 import com.mrkevin574.memorygame.domain.model.GameSpecs
@@ -61,51 +60,51 @@ object GameBoard {
 
     private fun getEasyCards(): MutableList<Card> {
         return mutableListOf(
-            Card.ID01(),
-            Card.ID02(),
-            Card.ID03(),
-            Card.ID04(),
-            Card.ID05(),
-            Card.ID06(),
-            Card.ID07(),
-            Card.ID08(),
+            Card.Beerus(),
+            Card.Broly(),
+            Card.Cell(),
+            Card.Chaoz(),
+            Card.Freeza(),
+            Card.Gohan(),
+            Card.Goku(),
+            Card.Gotenks(),
         )
     }
 
     private fun getMediumCards(): MutableList<Card> {
         return mutableListOf(
-            Card.ID01(),
-            Card.ID02(),
-            Card.ID03(),
-            Card.ID04(),
-            Card.ID05(),
-            Card.ID06(),
-            Card.ID07(),
-            Card.ID08(),
-            Card.ID09(),
-            Card.ID10(),
-            Card.ID11(),
-            Card.ID12(),
+            Card.Beerus(),
+            Card.Broly(),
+            Card.Cell(),
+            Card.Chaoz(),
+            Card.Freeza(),
+            Card.Gohan(),
+            Card.Goku(),
+            Card.Gotenks(),
+            Card.Jiren(),
+            Card.KaioDelNorte(),
+            Card.Krilin(),
+            Card.MajinBoo(),
         )
     }
 
     private fun getHardCards(): MutableList<Card> {
         return mutableListOf(
-            Card.ID01(),
-            Card.ID02(),
-            Card.ID03(),
-            Card.ID04(),
-            Card.ID05(),
-            Card.ID06(),
-            Card.ID07(),
-            Card.ID08(),
-            Card.ID09(),
-            Card.ID10(),
-            Card.ID11(),
-            Card.ID12(),
-            Card.ID13(),
-            Card.ID14(),
-            Card.ID15(),
+            Card.Beerus(),
+            Card.Broly(),
+            Card.Cell(),
+            Card.Chaoz(),
+            Card.Freeza(),
+            Card.Gohan(),
+            Card.Goku(),
+            Card.Gotenks(),
+            Card.Jiren(),
+            Card.KaioDelNorte(),
+            Card.Krilin(),
+            Card.MajinBoo(),
+            Card.Numero18(),
+            Card.Piccolo(),
+            Card.Vegeta(),
         )
     }
 
