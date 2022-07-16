@@ -66,7 +66,7 @@ fun GameScreen(
 fun Card(card: Card, width: Int, height: Int, onClick : () -> Unit) {
     Image(
         painter = painterResource(
-            id = if (card.flipped) card.resId else card.resId
+            id = if (card.flipped) card.resId else R.drawable.card_back_02
         ),
         contentDescription = null,
         modifier = Modifier

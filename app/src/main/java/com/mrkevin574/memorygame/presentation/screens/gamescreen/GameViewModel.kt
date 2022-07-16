@@ -33,7 +33,7 @@ class GameViewModel @Inject constructor() : ViewModel(){
             Click.First -> {
                 Click.Second
             }
-            else -> Click.Second
+            else -> Click.First
         }
 
         gameState.value = GameSpecs(

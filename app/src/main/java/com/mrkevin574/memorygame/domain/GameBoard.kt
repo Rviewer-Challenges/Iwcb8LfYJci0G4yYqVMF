@@ -11,36 +11,44 @@ object GameBoard {
 
     fun getGameSpecs(difficult: Difficult): GameSpecs {
         val dimens = getDimenByDifficult(difficult)
-        val board = getRandomCardsByDifficult(dimens)
+        val board = getRandomCardsByDifficult(difficult)
         return GameSpecs(board = board, dimenGame = dimens)
     }
 
-    private fun getRandomCardsByDifficult(dimens: DimenGame): List<Card> {
-        val totalSizeOfCards = (dimens.horizontal * dimens.vertical) / 2
+    private fun getRandomCardsByDifficult(difficult: Difficult): List<Card> {
 
-        val cards = getAllCards()
-        val secondsCards = mutableListOf<Card>()
+        val cards: MutableList<Card>
+        val secondsCards: MutableList<Card>
 
-        val finalCardList = mutableListOf<Card>()
-        val randomCards1 = mutableListOf<Card>()
-        val randomCards2 = mutableListOf<Card>()
+        when (difficult) {
+            Difficult.Easy -> {
+                cards = getEasyCards()
+                secondsCards = getEasyCards()
+            }
+            Difficult.Medium -> {
+                cards = getMediumCards()
+                secondsCards = getMediumCards()
+            }
+            Difficult.Hard -> {
+                cards = getHardCards()
+                secondsCards = getHardCards()
+            }
+        }
 
+        val randomCards = getRandomCardsOfList(cards)
+        randomCards.addAll(getRandomCardsOfList(secondsCards))
 
-        for (i in 0 until totalSizeOfCards) {
+        return randomCards
+    }
+
+    private fun getRandomCardsOfList(cards: MutableList<Card>): MutableList<Card> {
+        val randomCards = mutableListOf<Card>()
+        for (i in cards.indices) {
             val card = cards.random(Random(System.nanoTime()))
-            randomCards1.add(card)
-            secondsCards.add(card)
+            randomCards.add(card)
             cards.remove(card)
         }
-        for (i in 0 until totalSizeOfCards) {
-            val card = secondsCards.random(Random(System.nanoTime()))
-            randomCards2.add(card)
-            secondsCards.remove(card)
-        }
-        finalCardList.addAll(randomCards1)
-        finalCardList.addAll(randomCards2)
-
-        return finalCardList
+        return randomCards
     }
 
     private fun getDimenByDifficult(difficult: Difficult): DimenGame {
@@ -51,23 +59,53 @@ object GameBoard {
         }
     }
 
-    private fun getAllCards(): MutableList<Card> {
+    private fun getEasyCards(): MutableList<Card> {
         return mutableListOf(
-            Card(resId = R.drawable.card_01, uniqueId = 1, flipped = false),
-            Card(resId = R.drawable.card_02, uniqueId = 2, flipped = false),
-            Card(resId = R.drawable.card_03, uniqueId = 3, flipped = false),
-            Card(resId = R.drawable.card_04, uniqueId = 4, flipped = false),
-            Card(resId = R.drawable.card_05, uniqueId = 5, flipped = false),
-            Card(resId = R.drawable.card_06, uniqueId = 6, flipped = false),
-            Card(resId = R.drawable.card_07, uniqueId = 7, flipped = false),
-            Card(resId = R.drawable.card_08, uniqueId = 8, flipped = false),
-            Card(resId = R.drawable.card_09, uniqueId = 9, flipped = false),
-            Card(resId = R.drawable.card_10, uniqueId = 10, flipped = false),
-            Card(resId = R.drawable.card_11, uniqueId = 11, flipped = false),
-            Card(resId = R.drawable.card_12, uniqueId = 12, flipped = false),
-            Card(resId = R.drawable.card_13, uniqueId = 13, flipped = false),
-            Card(resId = R.drawable.card_14, uniqueId = 14, flipped = false),
-            Card(resId = R.drawable.card_15, uniqueId = 15, flipped = false)
+            Card.ID01(),
+            Card.ID02(),
+            Card.ID03(),
+            Card.ID04(),
+            Card.ID05(),
+            Card.ID06(),
+            Card.ID07(),
+            Card.ID08(),
+        )
+    }
+
+    private fun getMediumCards(): MutableList<Card> {
+        return mutableListOf(
+            Card.ID01(),
+            Card.ID02(),
+            Card.ID03(),
+            Card.ID04(),
+            Card.ID05(),
+            Card.ID06(),
+            Card.ID07(),
+            Card.ID08(),
+            Card.ID09(),
+            Card.ID10(),
+            Card.ID11(),
+            Card.ID12(),
+        )
+    }
+
+    private fun getHardCards(): MutableList<Card> {
+        return mutableListOf(
+            Card.ID01(),
+            Card.ID02(),
+            Card.ID03(),
+            Card.ID04(),
+            Card.ID05(),
+            Card.ID06(),
+            Card.ID07(),
+            Card.ID08(),
+            Card.ID09(),
+            Card.ID10(),
+            Card.ID11(),
+            Card.ID12(),
+            Card.ID13(),
+            Card.ID14(),
+            Card.ID15(),
         )
     }
 
