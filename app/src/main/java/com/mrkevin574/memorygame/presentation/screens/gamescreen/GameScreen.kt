@@ -64,7 +64,7 @@ fun Card(card: Card, width: Int, height: Int) {
         modifier = Modifier
             .width(width.dp)
             .height(height.dp)
-            .padding(2.dp),
+            .padding(4.dp),
         contentScale = ContentScale.FillBounds
     )
 }
