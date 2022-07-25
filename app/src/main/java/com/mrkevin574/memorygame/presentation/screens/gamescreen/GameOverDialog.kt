@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -19,6 +20,7 @@ import com.mrkevin574.memorygame.ui.theme.*
 @Composable
 fun GameOverDialog(
     viewModel: GameViewModel = hiltViewModel(),
+    text : String,
     onExit: () -> Unit
 ) {
     if (viewModel.gameOver.value) {
@@ -35,11 +37,6 @@ fun GameOverDialog(
                 )
             ) {
                 TextGameWin()
-                ButtonAlert(text = "exit") {
-                    onExit()
-                    viewModel.gameOver.value = false
-                }
-
             }
         }
     }
@@ -55,26 +52,8 @@ fun TextGameWin() {
         textAlign = TextAlign.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(15.dp)
+            .padding(15.dp),
+        fontWeight = FontWeight.Bold
     )
 }
 
-@Composable
-fun ButtonAlert(text: String, onClick: () -> Unit) {
-    OutlinedButton(
-        onClick = onClick,
-        modifier = Modifier
-            .width(150.dp)
-            .height(40.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Primary
-        )
-    ) {
-        Text(
-            text = text,
-            fontFamily = cinzelFontFamily,
-            fontSize = 12.sp,
-            color = Accent
-        )
-    }
-}

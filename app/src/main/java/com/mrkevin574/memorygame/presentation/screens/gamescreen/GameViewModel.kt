@@ -5,7 +5,9 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.mrkevin574.memorygame.R
 import com.mrkevin574.memorygame.domain.GameBoard
+import com.mrkevin574.memorygame.domain.GameSound
 import com.mrkevin574.memorygame.domain.model.Card
 import com.mrkevin574.memorygame.domain.model.GameSpecs
 import com.mrkevin574.memorygame.util.Click
@@ -14,7 +16,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class GameViewModel @Inject constructor() : ViewModel(){
+class GameViewModel @Inject constructor(
+    private val gameSound : GameSound
+) : ViewModel(){
 
     val gameState = mutableStateOf(GameSpecs())
 
@@ -25,6 +29,8 @@ class GameViewModel @Inject constructor() : ViewModel(){
     val timeLeft = mutableStateOf("1:00")
 
     val gameOver = mutableStateOf(false)
+
+    var isWinner = false
 
     var isTimeRunning = false
 
@@ -38,8 +44,10 @@ class GameViewModel @Inject constructor() : ViewModel(){
         }
 
         override fun onFinish() {
+            isWinner = false
             isTimeRunning = false
             gameOver.value = true
+            gameSound.play(R.raw.game_over)
         }
 
     }
@@ -78,10 +86,18 @@ class GameViewModel @Inject constructor() : ViewModel(){
                 movements.value++
                 if(firstPassCard.uniqueId == card.uniqueId)
                 {
+                    gameSound.play(R.raw.correct_click)
                     couplesLeft.value--
                     secondPassCard = null
+                    if(couplesLeft.value == 0)
+                    {
+                        isWinner = true
+                        gameSound.play(R.raw.win_game)
+                        gameOver.value = true
+                    }
                 }else{
                     secondPassCard = card
+                    gameSound.play(R.raw.click_error)
                 }
                 Click.First
             }

@@ -65,7 +65,10 @@ fun GameScreen(
         }
     }
 
-    GameOverDialog {
+
+    GameOverDialog(
+        text = if(viewModel.isWinner) "Winner" else "Game over"
+    ) {
         navController.navigate(Screen.Start.route)
     }
 
