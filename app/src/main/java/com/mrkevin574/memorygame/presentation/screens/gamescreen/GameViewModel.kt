@@ -94,6 +94,7 @@ class GameViewModel @Inject constructor(
                         isWinner = true
                         gameSound.play(R.raw.win_game)
                         gameOver.value = true
+                        timer.cancel()
                     }
                 }else{
                     secondPassCard = card

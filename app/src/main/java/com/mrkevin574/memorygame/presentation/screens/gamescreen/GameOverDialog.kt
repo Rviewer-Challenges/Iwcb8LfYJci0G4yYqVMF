@@ -36,16 +36,16 @@ fun GameOverDialog(
                     containerColor = AlertDialogColor
                 )
             ) {
-                TextGameWin()
+                TextGameWin(text)
             }
         }
     }
 }
 
 @Composable
-fun TextGameWin() {
+fun TextGameWin(text : String) {
     Text(
-        text = stringResource(R.string.game_over),
+        text = text,
         color = Primary,
         fontFamily = cinzelFontFamily,
         fontSize = 30.sp,
